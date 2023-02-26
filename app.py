@@ -4,8 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-st.set_page_config(page_title="Dividendos Fundos Imobiliários", page_icon=":bar_chart:", layout="wide")
-
+st.set_page_config(page_title="Dividendos Fundos Imobiliários", page_icon=":bar_chart:")
 # Título do aplicativo
 st.title("Dividendos Fundos Imobiliários")
 
@@ -28,7 +27,7 @@ def extract_data(ticker):
     dividends = dividends.sort_index(ascending=False)
 
     # Obtenha os dados de preços de fechamento usando a função history do objeto Ticker
-    prices = stock.history(period='5y')['Close']
+    prices = stock.history(period='10y')['Close']
     prices = prices.sort_index(ascending=False)
 
     # Calcular o retorno mensal a partir dos preços de fechamento
@@ -41,9 +40,13 @@ def extract_data(ticker):
     df = df.rename(columns={'Date': 'Data'})
     df = df.sort_values('Data', ascending=False)
 
+    # Adicione a coluna de percentual do dividendo
+    if "Dividendos" in df.columns:
+        df["Percentual Dividendo"] = (df["Dividendos"] / df["Preço de Fechamento"]) * 100
+    else:
+        df["Percentual Dividendo"] = 0
+    
     return df, dividends, ticker
-
-
 
 # Chame o callback com a ação selecionada
 df, dividends, ticker = extract_data(selected_ticker)
@@ -63,3 +66,6 @@ st.pyplot(fig)
 
 # Plot o gráfico de retornos mensais ao longo do tempo usando Streamlit
 st.line_chart(df.set_index('Data')['Preço de Fechamento'])
+
+
+
