@@ -3,8 +3,9 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-st.set_page_config(layout="wide")
+
 st.set_page_config(page_title="Dividendos Fundos Imobiliários", page_icon=":bar_chart:")
+st.set_page_config(layout="wide")
 # Título do aplicativo
 st.title("Dividendos Fundos Imobiliários")
 
