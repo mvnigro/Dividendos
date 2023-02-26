@@ -60,11 +60,5 @@ ax.set_title(f'Dividendos para {ticker}')
 fig.set_size_inches(12, 6)
 st.pyplot(fig)
 
-# Plot o gráfico de retornos mensais em um gráfico separado
-fig2, ax2 = plt.subplots()
-ax2.plot(df['Data'], df['Preço de Fechamento'])
-ax2.set_xlabel('Data')
-ax2.set_ylabel('Preço de Fechamento')
-ax2.set_title(f'Preços {ticker}')
-fig2.set_size_inches(12, 6)
-st.pyplot(fig2)
+# Plot o gráfico de retornos mensais ao longo do tempo usando Streamlit
+st.line_chart(df.set_index('Data')['Preço de Fechamento'])
