@@ -67,5 +67,8 @@ st.pyplot(fig)
 # Plot o gráfico de retornos mensais ao longo do tempo usando Streamlit
 st.line_chart(df.set_index('Data')['Preço de Fechamento'])
 
+# Plot o gráfico de retornos mensais ao longo do tempo usando Streamlit
+st.line_chart(df.set_index('Dividendos')['Percentual Dividendo'])
+
 
 
